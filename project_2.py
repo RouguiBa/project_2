@@ -158,6 +158,9 @@ def list_and_export_images(stations, output_path, start_date, end_date):
         images_gdf = pd.concat([images_gdf, images_df], ignore_index=True)
 
         # Write temporary JSON file for each station
+        os.makedirs('temporary_stations_files', exist_ok=True)
+
+        
         images_df.to_csv(os.path.join('temporary_stations_files', f"{station['id']}.json"))
 
     # Merge all information into one SHP file
@@ -176,6 +179,7 @@ def list_and_export_images(stations, output_path, start_date, end_date):
 if __name__ == "__main__":
     data_path = "data"
     output_path = "output"
+    os.makedirs(output_path, exist_ok=True)
     start_date = "2022-01-01"
     end_date = "2022-09-30"
 
